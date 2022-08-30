@@ -21,6 +21,8 @@ import datetime
 import time
 #======python的函數庫==========
 
+
+#line_bot_api  負責 與 Line 本身的API做溝通 
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
@@ -68,7 +70,10 @@ def handle_message(event):
         message = function_list()
         line_bot_api.reply_message(event.reply_token, message)
     else:
+        #重複使用者訊息
+
         message = TextSendMessage(text=msg)
+        print("123")
         line_bot_api.reply_message(event.reply_token, message)
 
 @handler.add(PostbackEvent)
